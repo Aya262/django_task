@@ -1,0 +1,16 @@
+version: "3"
+services:
+  django_redis:
+    image: redis:latest
+    container_name: django_redis
+    ports: 
+      - 6379:6379
+  django_web:
+    build: .
+    command: python3 manage.py runserver
+    depends_on: 
+      - django_redis
+    ports:
+      - "8000:8000"
+    # volumes:
+    #   - ./: /app/
